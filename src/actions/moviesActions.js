@@ -9,7 +9,6 @@ export function getFrontpagePopular() {
     )
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson);
         dispatch(setFrontpagePopular(responseJson));
       })
       .catch(error => {});

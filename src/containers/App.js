@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import Header from "../components/Header";
+import FeaturedMovie from "../components/FeaturedMovie";
 
 import { getFrontpagePopular } from "../actions/moviesActions";
-
-import { connect } from "react-redux";
 
 class App extends Component {
   componentDidMount() {
@@ -11,14 +13,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Movie app</h1>
+        <Header />
+        {this.props.frontpagePopularMovies ? (
+          <FeaturedMovie movie={this.props.frontpagePopularMovies.results[0]} />
+        ) : null}
       </div>
     );
   }
 }
 const mapStateToProps = (state, props) => {
   return {
-    movies: state.movies
+    frontpagePopularMovies: state.frontpageMovies.frontpagePopularMovies
   };
 };
 

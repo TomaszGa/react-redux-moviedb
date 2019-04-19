@@ -1,9 +1,9 @@
 const frontpageReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case "SET_FRONTPAGE_MOVIES": {
+    case "SET_FRONTPAGE_POPULAR": {
       return {
         ...state,
-        movies: payload.movies
+        frontpagePopularMovies: payload.popular
       };
     }
     default:
