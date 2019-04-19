@@ -2,7 +2,7 @@ This app uses the [TMDb](https://www.themoviedb.org) API to allow for easy brows
 
 ## Planned features:
 
-- frontpage view with popular movies, recent movies
+- frontpage view with featured movie, grid of popular movies, recent movies
 - search box with suggested results
 - single movie view with details
 - browsing by author, year, genre
