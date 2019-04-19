@@ -4,11 +4,12 @@ import styled from "styled-components";
 import SearchBox from "../containers/SearchBox";
 
 const Container = styled.div`
-  background: red;
+  background: #00fc87;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 10px 0px;
+  max-width: 1100px;
 `;
 
 const Logo = styled.h1`
@@ -18,7 +19,7 @@ const Logo = styled.h1`
 const Header = () => {
   return (
     <Container>
-      <Logo>Logo</Logo>
+      <Logo>MovieDB Explorer</Logo>
       <SearchBox />
     </Container>
   );
