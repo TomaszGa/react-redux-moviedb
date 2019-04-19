@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./App";
+import App from "./containers/App";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";

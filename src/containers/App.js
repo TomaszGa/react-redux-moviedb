@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import { getFrontpagePopular } from "./actions/moviesActions";
+import { getFrontpagePopular } from "../actions/moviesActions";
 
 import { connect } from "react-redux";
 
 class App extends Component {
   componentDidMount() {
-    this.props.onApiRequest();
+    this.props.getFrontpagePopular();
   }
   render() {
     return (
