@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
+import { getFrontpagePopular } from "./actions/moviesActions";
+
+import { connect } from "react-redux";
+
 class App extends Component {
+  componentDidMount() {
+    this.props.onApiRequest();
+  }
   render() {
     return (
       <div>
@@ -9,5 +16,17 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state, props) => {
+  return {
+    movies: state.movies
+  };
+};
 
-export default App;
+const mapActionsToProps = {
+  getFrontpagePopular: getFrontpagePopular
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(App);
