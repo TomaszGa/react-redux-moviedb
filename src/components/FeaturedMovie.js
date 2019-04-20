@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 const Container = styled.div`
   padding: 30px 15px;
-  background-image: url(https://image.tmdb.org/t/p/original/${props => props.backdropPath});
+  background: #000;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://image.tmdb.org/t/p/original/${props => props.backdropPath});
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -15,7 +17,7 @@ const Container = styled.div`
 
 const InnerContainer = styled.div`
   display: flex;
-  max-width: 800px;
+  max-width: 850px;
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
@@ -42,7 +44,6 @@ const MovieHeading = styled.h1`
 `;
 
 const FeaturedMovie = props => {
-  console.log(props);
   return (
     <Container backdropPath={props.movie.backdrop_path}>
       <InnerContainer>

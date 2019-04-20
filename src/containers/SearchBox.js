@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const InputBox = styled.input`
-  border-radius: 50px;
+  border-radius: 25px;
   border: 1px solid lightgrey;
 `;
 
