@@ -1,5 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+
+import { getFrontpagePopular } from "../actions/moviesActions";
 
 const Container = styled.div`
   padding: 30px 15px;
@@ -43,23 +46,52 @@ const MovieHeading = styled.h1`
   color: #fff;
 `;
 
-const FeaturedMovie = props => {
-  return (
-    <Container backdropPath={props.movie.backdrop_path}>
-      <InnerContainer>
-        <PosterContainer>
-          <Poster
-            src={`https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`}
-            alt="movie poster"
-          />
-        </PosterContainer>
-        <TextBox>
-          <MovieHeading>{props.movie.original_title}</MovieHeading>
-          <p>{props.movie.overview}</p>
-        </TextBox>
-      </InnerContainer>
-    </Container>
-  );
+class FeaturedMovie extends Component {
+  componentDidMount() {
+    this.props.getFrontpagePopular();
+  }
+
+  render() {
+    const { frontpagePopularMovies } = this.props;
+
+    console.log(this.props);
+    if (!frontpagePopularMovies) {
+      return null;
+    }
+    return (
+      <Container backdropPath={frontpagePopularMovies.results[0].backdrop_path}>
+        <InnerContainer>
+          <PosterContainer>
+            <Poster
+              src={`https://image.tmdb.org/t/p/w500/${
+                frontpagePopularMovies.results[0].poster_path
+              }`}
+              alt="movie poster"
+            />
+          </PosterContainer>
+          <TextBox>
+            <MovieHeading>
+              {this.props.frontpagePopularMovies.results[0].original_title}
+            </MovieHeading>
+            <p>{this.props.frontpagePopularMovies.results[0].overview}</p>
+          </TextBox>
+        </InnerContainer>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = (state, props) => {
+  return {
+    frontpagePopularMovies: state.frontpageMovies.frontpagePopularMovies
+  };
 };
 
-export default FeaturedMovie;
+const mapDispatchToProps = {
+  getFrontpagePopular: getFrontpagePopular
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FeaturedMovie);
