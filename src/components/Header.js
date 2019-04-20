@@ -4,23 +4,32 @@ import styled from "styled-components";
 import SearchBox from "../containers/SearchBox";
 
 const Container = styled.div`
-  background: #00fc87;
+  background: transparent;
+  position: fixed;
+  width: 100%;
+  padding: 10px 0px;
+`;
+
+const InnerContainer = styled.div`
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0px;
-  max-width: 1100px;
 `;
 
 const Logo = styled.h1`
   margin: 0;
+  color: #fff;
 `;
 
 const Header = () => {
   return (
     <Container>
-      <Logo>MovieDB Explorer</Logo>
-      <SearchBox />
+      <InnerContainer>
+        <Logo>MovieDB Explorer</Logo>
+        <SearchBox />
+      </InnerContainer>
     </Container>
   );
 };

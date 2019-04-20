@@ -12,7 +12,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.2.0",
     "typography": "^0.16.19",
-    "typography-theme-irving": "^0.16.19"
+    "typography-theme-fairy-gates": "^0.16.19"
   },
   "scripts": {
     "start": "react-scripts start",

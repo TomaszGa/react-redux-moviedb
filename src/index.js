@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./containers/App";
 
 import Typography from "typography";
-import irvingTheme from "typography-theme-irving";
+import fairyGatesTheme from "typography-theme-fairy-gates";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
@@ -17,8 +17,9 @@ const combinedReducers = combineReducers({
   frontpageMovies: frontpageReducer
 });
 
-const typography = new Typography(irvingTheme);
+const typography = new Typography(fairyGatesTheme);
 typography.injectStyles();
+// typography.toString();
 
 const initialState = {};
 
