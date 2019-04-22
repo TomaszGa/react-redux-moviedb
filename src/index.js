@@ -14,10 +14,12 @@ import { BrowserRouter } from "react-router-dom";
 
 import frontpageReducer from "./reducers/frontpageReducer";
 import singleMovieReducer from "./reducers/singleMovieReducer";
+import searchReducer from "./reducers/searchReducer";
 
 const combinedReducers = combineReducers({
   frontpageMovies: frontpageReducer,
-  singleMovie: singleMovieReducer
+  singleMovie: singleMovieReducer,
+  search: searchReducer
 });
 
 // const typography = new Typography(fairyGatesTheme);

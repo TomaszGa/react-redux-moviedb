@@ -50,12 +50,19 @@ const MovieHeading = styled.h1`
 
 class singleMovie extends Component {
   componentDidMount() {
+    console.log(this.props);
     this.props.getSingleMovie(this.props.match.params.movieId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.props.getSingleMovie(this.props.match.params.movieId);
+    }
+  }
+
   render() {
+    // console.log(this.props);
     const { singleMovieData } = this.props;
-    console.log(this.props);
 
     if (!singleMovieData) {
       return null;
