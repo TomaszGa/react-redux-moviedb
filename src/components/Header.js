@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+import logo from "../logo.svg";
 
 import SearchBox from "../containers/SearchBox";
 
@@ -7,7 +10,7 @@ const Container = styled.div`
   background: transparent;
   position: fixed;
   width: 100%;
-  padding: 10px 0px;
+  padding: 20px 0px;
 `;
 
 const InnerContainer = styled.div`
@@ -19,16 +22,23 @@ const InnerContainer = styled.div`
   height: 80px;
 `;
 
-const Logo = styled.h1`
+const LogoLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const Logo = styled.img`
   margin: 0;
-  color: #fff;
+  width: 180px;
+  text-decoration: none;
 `;
 
 const Header = () => {
   return (
     <Container>
       <InnerContainer>
-        <Logo>MovieDB Explorer</Logo>
+        <LogoLink to="/">
+          <Logo src={logo} alt="Powered by moviedb " />
+        </LogoLink>
         <SearchBox />
       </InnerContainer>
     </Container>

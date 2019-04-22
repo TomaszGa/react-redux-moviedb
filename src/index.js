@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./containers/App";
 
-import Typography from "typography";
-import fairyGatesTheme from "typography-theme-fairy-gates";
+// import Typography from "typography";
+// import fairyGatesTheme from "typography-theme-fairy-gates";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
@@ -13,14 +13,15 @@ import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 
 import frontpageReducer from "./reducers/frontpageReducer";
+import singleMovieReducer from "./reducers/singleMovieReducer";
 
 const combinedReducers = combineReducers({
-  frontpageMovies: frontpageReducer
+  frontpageMovies: frontpageReducer,
+  singleMovie: singleMovieReducer
 });
 
-const typography = new Typography(fairyGatesTheme);
-typography.injectStyles();
-// typography.toString();
+// const typography = new Typography(fairyGatesTheme);
+// typography.injectStyles();
 
 const initialState = {};
 

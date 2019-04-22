@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { getFrontpagePopular } from "../actions/moviesActions";
+import { getSingleMovie } from "../actions/singleMovieActions";
 
 const Container = styled.div`
   padding: 30px 15px;
@@ -26,10 +26,12 @@ const InnerContainer = styled.div`
 
 const PosterContainer = styled.div`
   width: 45%;
+  min-height: 550px;
 `;
 
 const Poster = styled.img`
   max-width: 100%;
+
   margin-bottom: 0;
   display: block;
 `;
@@ -46,33 +48,35 @@ const MovieHeading = styled.h1`
   color: #fff;
 `;
 
-class FeaturedMovie extends Component {
+class singleMovie extends Component {
   componentDidMount() {
-    this.props.getFrontpagePopular();
+    this.props.getSingleMovie(this.props.match.params.movieId);
   }
 
   render() {
-    const { frontpagePopularMovies } = this.props;
+    const { singleMovieData } = this.props;
+    console.log(this.props);
 
-    if (!frontpagePopularMovies) {
+    if (!singleMovieData) {
       return null;
     }
+
     return (
-      <Container backdropPath={frontpagePopularMovies.results[0].backdrop_path}>
+      <Container backdropPath={singleMovieData.backdrop_path}>
         <InnerContainer>
           <PosterContainer>
             <Poster
               src={`https://image.tmdb.org/t/p/w500/${
-                frontpagePopularMovies.results[0].poster_path
+                singleMovieData.poster_path
               }`}
               alt="movie poster"
             />
           </PosterContainer>
           <TextBox>
             <MovieHeading>
-              {this.props.frontpagePopularMovies.results[0].original_title}
+              {this.props.singleMovieData.original_title}
             </MovieHeading>
-            <p>{this.props.frontpagePopularMovies.results[0].overview}</p>
+            <p>{this.props.singleMovieData.overview}</p>
           </TextBox>
         </InnerContainer>
       </Container>
@@ -82,15 +86,15 @@ class FeaturedMovie extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    frontpagePopularMovies: state.frontpageMovies.frontpagePopularMovies
+    singleMovieData: state.singleMovie.singleMovieData
   };
 };
 
 const mapDispatchToProps = {
-  getFrontpagePopular: getFrontpagePopular
+  getSingleMovie: getSingleMovie
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FeaturedMovie);
+)(singleMovie);
