@@ -6,19 +6,58 @@ import { Link } from "react-router-dom";
 import { getSearchResults } from "../actions/searchActions";
 
 const InputBox = styled.input`
-  border-radius: 25px;
-  border: 1px solid lightgrey;
+  background: transparent;
+  width: 300px;
+  border: 0;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px 15px;
+  font-family: inherit;
+  color: #fff;
+`;
+
+const SearchContainer = styled.div`
+  position: relative;
+`;
+
+const SearchResults = styled.div`
+width: 100%;
+  display: ${props => (props.shouldDisplay ? "block" : "none")}
+  position: absolute;
+  top: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.2);
+`;
+
+const StyledLink = styled(Link)`
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 6px;
 `;
 
 class SearchBox extends Component {
   state = {
-    inputValue: ""
+    inputValue: "",
+    resultsVisible: false
   };
 
   handleChange = event => {
     this.setState({ inputValue: event.target.value });
     if (event.target.value.length > 2) {
+      this.setState({ resultsVisible: true });
       this.props.getSearchResults(event.target.value);
+    } else {
+      this.setState({ resultsVisible: false });
+    }
+  };
+
+  handleBlur = event => {
+    console.log(event.relatedTarget);
+    if (
+      event.relatedTarget &&
+      !event.relatedTarget.className.toLowerCase().includes("dropdown-link")
+    ) {
+      this.setState({ resultsVisible: false });
     }
   };
 
@@ -28,22 +67,28 @@ class SearchBox extends Component {
       this.props.searchResults &&
       this.props.searchResults.total_results > 0
     ) {
-      linkList = this.props.searchResults.results.map(result => (
-        <Link key={result.id} to={`/s/${result.id}`}>
+      linkList = this.props.searchResults.results.slice(0, 7).map(result => (
+        <StyledLink
+          className="dropdown-link"
+          key={result.id}
+          to={`/s/${result.id}`}
+        >
           {result.title}
-        </Link>
+        </StyledLink>
       ));
     }
     return (
       <form>
-        <div>
+        <SearchContainer onBlur={this.handleBlur}>
           <InputBox
             type="text"
             value={this.state.inputValue}
             onChange={this.handleChange}
           />
-          {linkList ? linkList : null}
-        </div>
+          <SearchResults shouldDisplay={this.state.resultsVisible}>
+            {linkList ? linkList : null}
+          </SearchResults>
+        </SearchContainer>
       </form>
     );
   }
