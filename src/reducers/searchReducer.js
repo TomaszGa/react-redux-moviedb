@@ -6,6 +6,18 @@ const searchReducer = (state = {}, { type, payload }) => {
         searchResults: payload.searchResults
       };
     }
+    case "SHOW_RESULTS_LIST": {
+      return {
+        ...state,
+        showSearchResultsList: true
+      };
+    }
+    case "HIDE_RESULTS_LIST": {
+      return {
+        ...state,
+        showSearchResultsList: false
+      };
+    }
     default:
       return state;
   }

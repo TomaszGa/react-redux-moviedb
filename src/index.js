@@ -22,10 +22,11 @@ const combinedReducers = combineReducers({
   search: searchReducer
 });
 
-// const typography = new Typography(fairyGatesTheme);
-// typography.injectStyles();
-
-const initialState = {};
+const initialState = {
+  search: {
+    showSearchResultsList: false
+  }
+};
 
 const store = createStore(
   combinedReducers,

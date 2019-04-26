@@ -10,17 +10,28 @@ export function getSearchResults(searchString) {
       .then(response => response.json())
       .then(responseJson => {
         dispatch(setSearchResults(responseJson));
+        dispatch(showResultsList());
       })
       .catch(error => {});
   };
 }
 
 export function setSearchResults(searchResults) {
-  console.log(searchResults);
   return {
     type: "SET_SEARCH_RESULTS",
     payload: {
       searchResults: searchResults
     }
+  };
+}
+
+export function showResultsList() {
+  return {
+    type: "SHOW_RESULTS_LIST"
+  };
+}
+export function hideResultsList() {
+  return {
+    type: "HIDE_RESULTS_LIST"
   };
 }

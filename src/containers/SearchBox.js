@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { getSearchResults } from "../actions/searchActions";
+import {
+  getSearchResults,
+  showResultsList,
+  hideResultsList
+} from "../actions/searchActions";
 
 const InputBox = styled.input`
   background: transparent;
@@ -25,40 +29,45 @@ width: 100%;
   position: absolute;
   top: 100%;
   padding: 10px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.7);
 `;
 
 const StyledLink = styled(Link)`
   display: block;
   color: #fff;
   text-decoration: none;
-  margin-bottom: 6px;
+  padding: 6px;
 `;
 
 class SearchBox extends Component {
   state = {
-    inputValue: "",
-    resultsVisible: false
+    inputValue: ""
   };
 
   handleChange = event => {
     this.setState({ inputValue: event.target.value });
     if (event.target.value.length > 2) {
-      this.setState({ resultsVisible: true });
       this.props.getSearchResults(event.target.value);
     } else {
-      this.setState({ resultsVisible: false });
+      this.props.hideResultsList();
     }
   };
 
   handleBlur = event => {
-    console.log(event.relatedTarget);
-    if (
-      event.relatedTarget &&
-      !event.relatedTarget.className.toLowerCase().includes("dropdown-link")
-    ) {
-      this.setState({ resultsVisible: false });
+    if (!event.relatedTarget) {
+      this.props.hideResultsList();
     }
+  };
+
+  handleFocus = event => {
+    if (this.state.inputValue.length > 2) {
+      this.props.showResultsList();
+    }
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.props.getSearchResults(this.state.inputValue);
   };
 
   render() {
@@ -72,20 +81,21 @@ class SearchBox extends Component {
           className="dropdown-link"
           key={result.id}
           to={`/s/${result.id}`}
+          onClick={this.props.hideResultsList}
         >
           {result.title}
         </StyledLink>
       ));
     }
     return (
-      <form>
-        <SearchContainer onBlur={this.handleBlur}>
+      <form onSubmit={this.handleFormSubmit}>
+        <SearchContainer onBlur={this.handleBlur} onFocus={this.handleFocus}>
           <InputBox
             type="text"
             value={this.state.inputValue}
             onChange={this.handleChange}
           />
-          <SearchResults shouldDisplay={this.state.resultsVisible}>
+          <SearchResults shouldDisplay={this.props.showSearchResultsList}>
             {linkList ? linkList : null}
           </SearchResults>
         </SearchContainer>
@@ -96,12 +106,15 @@ class SearchBox extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    searchResults: state.search.searchResults
+    searchResults: state.search.searchResults,
+    showSearchResultsList: state.search.showSearchResultsList
   };
 };
 
 const mapDispatchToProps = {
-  getSearchResults: getSearchResults
+  getSearchResults: getSearchResults,
+  showResultsList: showResultsList,
+  hideResultsList: hideResultsList
 };
 
 export default connect(

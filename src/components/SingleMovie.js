@@ -7,8 +7,11 @@ import { getSingleMovie } from "../actions/singleMovieActions";
 const Container = styled.div`
   padding: 30px 15px;
   background: #000;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(https://image.tmdb.org/t/p/original/${props => props.backdropPath});
+  ${({ backdropPath }) =>
+    backdropPath &&
+    `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url(https://image.tmdb.org/t/p/original/${backdropPath}););`}
+
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -61,7 +64,6 @@ class singleMovie extends Component {
   }
 
   render() {
-    // console.log(this.props);
     const { singleMovieData } = this.props;
 
     if (!singleMovieData) {
