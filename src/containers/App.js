@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 
 import Header from "../components/Header";
-import FeaturedMovie from "../components/FeaturedMovie";
+// import FeaturedMovie from "../components/FeaturedMovie";
 import SingleMovie from "../components/SingleMovie";
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/" component={FeaturedMovie} />
+          <Route exact path="/" component={SingleMovie} />
           <Route exact path="/s/:movieId" component={SingleMovie} />
           <Redirect to="/" />
         </Switch>

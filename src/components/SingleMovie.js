@@ -58,11 +58,19 @@ const MovieHeading = styled.h1`
 
 class singleMovie extends Component {
   componentDidMount() {
-    this.props.getSingleMovie(this.props.match.params.movieId);
+    this.findMovieId();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.findMovieId();
+    }
+  }
+
+  findMovieId() {
+    if (this.props.match.path === "/") {
+      this.props.getSingleMovie("299534");
+    } else {
       this.props.getSingleMovie(this.props.match.params.movieId);
     }
   }
