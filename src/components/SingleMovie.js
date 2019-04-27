@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { getSingleMovie } from "../actions/singleMovieActions";
+import {
+  getSingleMovie,
+  singlePosterLoaded
+} from "../actions/singleMovieActions";
 import FullScreenLoader from "./FullScreenLoader";
 
 const Container = styled.div`
@@ -54,7 +57,6 @@ const MovieHeading = styled.h1`
 
 class singleMovie extends Component {
   componentDidMount() {
-    console.log(this.props);
     this.props.getSingleMovie(this.props.match.params.movieId);
   }
 
@@ -65,9 +67,19 @@ class singleMovie extends Component {
   }
 
   render() {
-    const { singleMovieData } = this.props;
-
-    if (!singleMovieData) {
+    const { singleMovieData, singlePosterLoaded } = this.props;
+    if (singleMovieData) {
+      const img = new Image();
+      img.src = `https://image.tmdb.org/t/p/w500/${
+        singleMovieData.poster_path
+      }`;
+      const backdrop = new Image();
+      backdrop.src = `https://image.tmdb.org/t/p/original/${
+        singleMovieData.backdrop_path
+      }`;
+      img.onload = this.props.onSinglePosterLoaded;
+    }
+    if (!singleMovieData || !singlePosterLoaded) {
       return <FullScreenLoader />;
     }
 
@@ -96,12 +108,14 @@ class singleMovie extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    singleMovieData: state.singleMovie.singleMovieData
+    singleMovieData: state.singleMovie.singleMovieData,
+    singlePosterLoaded: state.singleMovie.singlePosterLoaded
   };
 };
 
 const mapDispatchToProps = {
-  getSingleMovie: getSingleMovie
+  getSingleMovie: getSingleMovie,
+  onSinglePosterLoaded: singlePosterLoaded
 };
 
 export default connect(

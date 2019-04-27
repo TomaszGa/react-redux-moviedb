@@ -13,7 +13,7 @@ const Container = styled.div`
 const FullScreenLoader = () => {
   return (
     <Container>
-      <BeatLoader color={"#123abc"} loading={true} />
+      <BeatLoader color={"#01d277"} loading={true} />
     </Container>
   );
 };

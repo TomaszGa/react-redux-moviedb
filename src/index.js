@@ -25,6 +25,9 @@ const combinedReducers = combineReducers({
 const initialState = {
   search: {
     showSearchResultsList: false
+  },
+  singleMovie: {
+    singlePosterLoaded: false
   }
 };
 

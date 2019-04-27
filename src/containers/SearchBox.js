@@ -71,7 +71,6 @@ class SearchBox extends Component {
   };
 
   render() {
-    console.log(this.props.searchResults);
     let linkList = null;
     if (
       this.props.searchResults &&
