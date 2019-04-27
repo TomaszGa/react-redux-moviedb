@@ -3,15 +3,24 @@ import keys from "../keys";
 export function getSingleMovie(id) {
   return dispatch => {
     let timeoutCheck = true;
+
+    /*
+     * only display loading spinner if loading has gone for 400ms to prevent bad visual effect on fast load
+     * on a fast connection a quick change of text and images is better
+     */
+
     setTimeout(() => {
       if (timeoutCheck) {
         dispatch(clearSingleMovie());
       }
-    }, 200);
+    }, 400);
+
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${keys.apiKey}`)
       .then(response => response.json())
       .then(responseJson => {
+        //disable spinner if response arrived under 200ms
         timeoutCheck = false;
+
         dispatch(setSingleMovie(responseJson));
       })
       .catch(error => {});

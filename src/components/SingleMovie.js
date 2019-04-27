@@ -10,7 +10,7 @@ import FullScreenLoader from "./FullScreenLoader";
 
 const Container = styled.div`
   padding: 30px 15px;
-  background: #000;
+  background: #222;
   ${({ backdropPath }) =>
     backdropPath &&
     `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -28,6 +28,7 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   max-width: 850px;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
@@ -68,17 +69,26 @@ class singleMovie extends Component {
 
   render() {
     const { singleMovieData, singlePosterLoaded } = this.props;
+
+    //if API request returned data
     if (singleMovieData) {
+      //preload poster image
       const img = new Image();
       img.src = `https://image.tmdb.org/t/p/w500/${
         singleMovieData.poster_path
       }`;
+
+      //preload backdrop image
       const backdrop = new Image();
       backdrop.src = `https://image.tmdb.org/t/p/original/${
         singleMovieData.backdrop_path
       }`;
+
+      //if poster image loaded, dispatch action, this will display the single movie
       img.onload = this.props.onSinglePosterLoaded;
     }
+
+    //show spinner if data or poster not loaded yet
     if (!singleMovieData || !singlePosterLoaded) {
       return <FullScreenLoader />;
     }
