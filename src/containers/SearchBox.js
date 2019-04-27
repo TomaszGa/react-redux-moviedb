@@ -54,7 +54,13 @@ class SearchBox extends Component {
   };
 
   handleBlur = event => {
+    //if no element gained focus, hide dropdown list
     if (!event.relatedTarget) {
+      this.props.hideResultsList();
+      return;
+    }
+    //if an elemnent gained focus but was not a dropdown link, hide dropdown list
+    if (!event.relatedTarget.className.includes("dropdown-link")) {
       this.props.hideResultsList();
     }
   };

@@ -3,7 +3,6 @@ import keys from "../keys";
 export function getSingleMovie(id) {
   return dispatch => {
     let timeoutCheck = true;
-
     /*
      * only display loading spinner if loading has gone for 400ms to prevent bad visual effect on fast load
      * on a fast connection a quick change of text and images is better
@@ -23,7 +22,9 @@ export function getSingleMovie(id) {
 
         dispatch(setSingleMovie(responseJson));
       })
-      .catch(error => {});
+      .catch(error => {
+        console.log("single movie fetch failed");
+      });
   };
 }
 

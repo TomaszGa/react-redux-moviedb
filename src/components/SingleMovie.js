@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+import notFound from "../poster-not-found.png";
+import MovieInformationBox from "./MovieInformationBox";
 
 import {
   getSingleMovie,
@@ -47,13 +51,36 @@ const Poster = styled.img`
 const TextBox = styled.div`
   width: 55%;
   height: 100%;
-  padding: 20px;
+  padding: 30px;
   color: #fff;
 `;
 
 const MovieHeading = styled.h1`
   margin-top: 0;
   color: #fff;
+`;
+
+const MovieSubheading = styled.h2`
+  color: #01d277;
+`;
+
+const Genres = styled.span`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const GenreLink = styled(Link)`
+  padding: 10px 15px;
+  border-radius: 3px;
+  background: #01d277;
+  margin: 0 10px 7px 0;
+  color: #fff;
+  text-decoration: none;
+`;
+
+const InfoBoxes = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 class singleMovie extends Component {
@@ -77,14 +104,17 @@ class singleMovie extends Component {
 
   render() {
     const { singleMovieData, singlePosterLoaded } = this.props;
-
+    console.log(singleMovieData);
+    let posterSrc = null;
     //if API request returned data
-    if (singleMovieData) {
-      //preload poster image
-      const img = new Image();
-      img.src = `https://image.tmdb.org/t/p/w500/${
+    if (singleMovieData && singleMovieData.poster_path) {
+      posterSrc = `https://image.tmdb.org/t/p/w500/${
         singleMovieData.poster_path
       }`;
+
+      //preload poster image
+      const poster = new Image();
+      poster.src = posterSrc;
 
       //preload backdrop image
       const backdrop = new Image();
@@ -93,7 +123,10 @@ class singleMovie extends Component {
       }`;
 
       //if poster image loaded, dispatch action, this will display the single movie
-      img.onload = this.props.onSinglePosterLoaded;
+      poster.onload = this.props.onSinglePosterLoaded;
+    } else {
+      posterSrc = notFound;
+      this.props.onSinglePosterLoaded();
     }
 
     //show spinner if data or poster not loaded yet
@@ -105,18 +138,39 @@ class singleMovie extends Component {
       <Container backdropPath={singleMovieData.backdrop_path}>
         <InnerContainer>
           <PosterContainer>
-            <Poster
-              src={`https://image.tmdb.org/t/p/w500/${
-                singleMovieData.poster_path
-              }`}
-              alt="movie poster"
-            />
+            <Poster src={posterSrc} alt="movie poster" />
           </PosterContainer>
           <TextBox>
-            <MovieHeading>
-              {this.props.singleMovieData.original_title}
-            </MovieHeading>
-            <p>{this.props.singleMovieData.overview}</p>
+            <MovieHeading>{singleMovieData.original_title}</MovieHeading>
+            <MovieSubheading>{singleMovieData.tagline}</MovieSubheading>
+            <p>{singleMovieData.overview}</p>
+            <Genres>
+              {singleMovieData.genres.map(genre => {
+                return (
+                  <GenreLink to="/" key={genre.name}>
+                    {genre.name}
+                  </GenreLink>
+                );
+              })}
+            </Genres>
+            <InfoBoxes>
+              <MovieInformationBox
+                heading={"Vote Average:"}
+                data={`${singleMovieData.vote_average}/10`}
+              />
+              <MovieInformationBox
+                heading={"Release Date:"}
+                data={`${singleMovieData.release_date}`}
+              />
+              <MovieInformationBox
+                heading={"Running Time:"}
+                data={`${singleMovieData.runtime}`}
+              />
+              <MovieInformationBox
+                heading={"Box Office:"}
+                data={`${singleMovieData.revenue}`}
+              />
+            </InfoBoxes>
           </TextBox>
         </InnerContainer>
       </Container>
