@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { getSingleMovie } from "../actions/singleMovieActions";
+import FullScreenLoader from "./FullScreenLoader";
 
 const Container = styled.div`
   padding: 30px 15px;
@@ -67,7 +68,7 @@ class singleMovie extends Component {
     const { singleMovieData } = this.props;
 
     if (!singleMovieData) {
-      return null;
+      return <FullScreenLoader />;
     }
 
     return (

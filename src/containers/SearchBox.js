@@ -71,6 +71,7 @@ class SearchBox extends Component {
   };
 
   render() {
+    console.log(this.props.searchResults);
     let linkList = null;
     if (
       this.props.searchResults &&
@@ -95,7 +96,12 @@ class SearchBox extends Component {
             value={this.state.inputValue}
             onChange={this.handleChange}
           />
-          <SearchResults shouldDisplay={this.props.showSearchResultsList}>
+          <SearchResults
+            shouldDisplay={
+              this.props.showSearchResultsList &&
+              this.props.searchResults.results.length > 0
+            }
+          >
             {linkList ? linkList : null}
           </SearchResults>
         </SearchContainer>
