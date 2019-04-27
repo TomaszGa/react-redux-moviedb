@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import notFound from "../poster-not-found.png";
 import MovieInformationBox from "./MovieInformationBox";
@@ -135,45 +136,50 @@ class singleMovie extends Component {
     }
 
     return (
-      <Container backdropPath={singleMovieData.backdrop_path}>
-        <InnerContainer>
-          <PosterContainer>
-            <Poster src={posterSrc} alt="movie poster" />
-          </PosterContainer>
-          <TextBox>
-            <MovieHeading>{singleMovieData.original_title}</MovieHeading>
-            <MovieSubheading>{singleMovieData.tagline}</MovieSubheading>
-            <p>{singleMovieData.overview}</p>
-            <Genres>
-              {singleMovieData.genres.map(genre => {
-                return (
-                  <GenreLink to="/" key={genre.name}>
-                    {genre.name}
-                  </GenreLink>
-                );
-              })}
-            </Genres>
-            <InfoBoxes>
-              <MovieInformationBox
-                heading={"Vote Average:"}
-                data={`${singleMovieData.vote_average}/10`}
-              />
-              <MovieInformationBox
-                heading={"Release Date:"}
-                data={`${singleMovieData.release_date}`}
-              />
-              <MovieInformationBox
-                heading={"Running Time:"}
-                data={`${singleMovieData.runtime}`}
-              />
-              <MovieInformationBox
-                heading={"Box Office:"}
-                data={`${singleMovieData.revenue}`}
-              />
-            </InfoBoxes>
-          </TextBox>
-        </InnerContainer>
-      </Container>
+      <>
+        <Helmet>
+          <title>{`TMDB Browser - ${singleMovieData.original_title}`}</title>
+        </Helmet>
+        <Container backdropPath={singleMovieData.backdrop_path}>
+          <InnerContainer>
+            <PosterContainer>
+              <Poster src={posterSrc} alt="movie poster" />
+            </PosterContainer>
+            <TextBox>
+              <MovieHeading>{singleMovieData.original_title}</MovieHeading>
+              <MovieSubheading>{singleMovieData.tagline}</MovieSubheading>
+              <p>{singleMovieData.overview}</p>
+              <Genres>
+                {singleMovieData.genres.map(genre => {
+                  return (
+                    <GenreLink to="/" key={genre.name}>
+                      {genre.name}
+                    </GenreLink>
+                  );
+                })}
+              </Genres>
+              <InfoBoxes>
+                <MovieInformationBox
+                  heading={"Vote Average:"}
+                  data={`${singleMovieData.vote_average}/10`}
+                />
+                <MovieInformationBox
+                  heading={"Release Date:"}
+                  data={`${singleMovieData.release_date}`}
+                />
+                <MovieInformationBox
+                  heading={"Running Time:"}
+                  data={`${singleMovieData.runtime}`}
+                />
+                <MovieInformationBox
+                  heading={"Box Office:"}
+                  data={`${singleMovieData.revenue}`}
+                />
+              </InfoBoxes>
+            </TextBox>
+          </InnerContainer>
+        </Container>
+      </>
     );
   }
 }
