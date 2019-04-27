@@ -12,14 +12,14 @@ import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 
-import frontpageReducer from "./reducers/frontpageReducer";
 import singleMovieReducer from "./reducers/singleMovieReducer";
 import searchReducer from "./reducers/searchReducer";
+import exploreReducer from "./reducers/exploreReducer";
 
 const combinedReducers = combineReducers({
-  frontpageMovies: frontpageReducer,
   singleMovie: singleMovieReducer,
-  search: searchReducer
+  search: searchReducer,
+  explore: exploreReducer
 });
 
 const initialState = {
