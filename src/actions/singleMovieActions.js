@@ -2,6 +2,8 @@ import keys from "../keys";
 
 export function getSingleMovie(id) {
   return dispatch => {
+    dispatch(clearSingleCast());
+
     let timeoutCheck = true;
     /*
      * only display loading spinner if loading has gone for 300ms to prevent bad visual effect on fast load
@@ -33,6 +35,17 @@ export function getSingleMovie(id) {
         console.log("single movie fetch failed");
         dispatch(setSingleError());
       });
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=17347cee537e6708466d904c0de876d7`
+    )
+      .then(response => response.json())
+      .then(responseJson => {
+        dispatch(setSingleCast(responseJson));
+      })
+      .catch(error => {
+        console.log("single movie cast fetch failed");
+      });
   };
 }
 
@@ -53,10 +66,7 @@ export function singlePosterLoaded() {
 
 export function clearSingleMovie() {
   return {
-    type: "CLEAR_SINGLE_MOVIE",
-    payload: {
-      singleMovieData: null
-    }
+    type: "CLEAR_SINGLE_MOVIE"
   };
 }
 
@@ -69,5 +79,20 @@ export function setSingleError() {
 export function clearSingleError() {
   return {
     type: "CLEAR_SINGLE_ERROR"
+  };
+}
+
+export function setSingleCast(singleMovieCastData) {
+  return {
+    type: "SET_SINGLE_CAST",
+    payload: {
+      singleMovieCastData: singleMovieCastData
+    }
+  };
+}
+
+export function clearSingleCast() {
+  return {
+    type: "CLEAR_SINGLE_CAST"
   };
 }

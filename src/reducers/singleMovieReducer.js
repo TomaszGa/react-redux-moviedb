@@ -31,6 +31,20 @@ const singleMovieReducer = (state = {}, { type, payload }) => {
         singleMovieError: false
       };
     }
+    case "SET_SINGLE_CAST": {
+      return {
+        ...state,
+        singleMovieCast: payload.singleMovieCastData
+      };
+    }
+
+    case "CLEAR_SINGLE_CAST": {
+      return {
+        ...state,
+        singleMovieCast: null
+      };
+    }
+
     default:
       return state;
   }

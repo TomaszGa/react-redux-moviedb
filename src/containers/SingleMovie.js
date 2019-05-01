@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 
 import notFound from "../poster-not-found.png";
 import MovieInformationBox from "../components/MovieInformationBox";
+import NavList from "../components/NavList";
 
 import {
   getSingleMovie,
@@ -65,20 +66,6 @@ const MovieSubheading = styled.h2`
   color: #01d277;
 `;
 
-const Genres = styled.span`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const GenreLink = styled(Link)`
-  padding: 10px 15px;
-  border-radius: 3px;
-  background: #01d277;
-  margin: 0 10px 7px 0;
-  color: #fff;
-  text-decoration: none;
-`;
-
 const InfoBoxes = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +94,8 @@ class singleMovie extends Component {
     const {
       singleMovieData,
       singlePosterLoaded,
-      singleMovieError
+      singleMovieError,
+      singleMovieCast
     } = this.props;
 
     if (singleMovieError) {
@@ -142,6 +130,14 @@ class singleMovie extends Component {
       return <FullScreenLoader />;
     }
 
+    let castData = null;
+
+    if (singleMovieCast) {
+      castData = singleMovieCast.cast.splice(0, 5).map(person => {
+        return { id: person.id, name: person.name };
+      });
+    }
+
     return (
       <>
         <Helmet>
@@ -156,18 +152,10 @@ class singleMovie extends Component {
               <MovieHeading>{singleMovieData.original_title}</MovieHeading>
               <MovieSubheading>{singleMovieData.tagline}</MovieSubheading>
               <p>{singleMovieData.overview}</p>
-              <Genres>
-                {singleMovieData.genres.map(genre => {
-                  return (
-                    <GenreLink
-                      to={`/explore/genre/${genre.id}`}
-                      key={genre.name}
-                    >
-                      {genre.name}
-                    </GenreLink>
-                  );
-                })}
-              </Genres>
+              <NavList
+                data={singleMovieData.genres}
+                baseUrl={"/explore/genre/"}
+              />
               <InfoBoxes>
                 <MovieInformationBox
                   heading={"Vote Average:"}
@@ -177,15 +165,10 @@ class singleMovie extends Component {
                   heading={"Release Date:"}
                   data={`${singleMovieData.release_date}`}
                 />
-                <MovieInformationBox
-                  heading={"Running Time:"}
-                  data={`${singleMovieData.runtime}`}
-                />
-                <MovieInformationBox
-                  heading={"Box Office:"}
-                  data={`${singleMovieData.revenue}`}
-                />
               </InfoBoxes>
+              {castData ? (
+                <NavList data={castData} baseUrl={"/explore/actor/"} />
+              ) : null}
             </TextBox>
           </InnerContainer>
         </Container>
@@ -198,7 +181,8 @@ const mapStateToProps = (state, props) => {
   return {
     singleMovieData: state.singleMovie.singleMovieData,
     singlePosterLoaded: state.singleMovie.singlePosterLoaded,
-    singleMovieError: state.singleMovie.singleMovieError
+    singleMovieError: state.singleMovie.singleMovieError,
+    singleMovieCast: state.singleMovie.singleMovieCast
   };
 };
 
