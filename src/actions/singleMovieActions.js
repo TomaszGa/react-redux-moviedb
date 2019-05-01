@@ -14,13 +14,18 @@ export function getSingleMovie(id) {
       }
     }, 300);
 
+    dispatch(clearSingleError());
+
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${keys.apiKey}`)
       .then(response => response.json())
       .then(responseJson => {
         //disable spinner if response arrived under 200ms
         timeoutCheck = false;
-
-        dispatch(setSingleMovie(responseJson));
+        if (responseJson.status_code && responseJson.status_code === 34) {
+          dispatch(setSingleError());
+        } else {
+          dispatch(setSingleMovie(responseJson));
+        }
       })
       .catch(error => {
         console.log("single movie fetch failed");
@@ -49,5 +54,17 @@ export function clearSingleMovie() {
     payload: {
       singleMovieData: null
     }
+  };
+}
+
+export function setSingleError() {
+  return {
+    type: "SET_SINGLE_ERROR"
+  };
+}
+
+export function clearSingleError() {
+  return {
+    type: "CLEAR_SINGLE_ERROR"
   };
 }

@@ -19,6 +19,18 @@ const singleMovieReducer = (state = {}, { type, payload }) => {
         singlePosterLoaded: true
       };
     }
+    case "SET_SINGLE_ERROR": {
+      return {
+        ...state,
+        singleMovieError: true
+      };
+    }
+    case "CLEAR_SINGLE_ERROR": {
+      return {
+        ...state,
+        singleMovieError: false
+      };
+    }
     default:
       return state;
   }

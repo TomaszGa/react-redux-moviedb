@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import notFound from "../poster-not-found.png";
@@ -104,8 +104,15 @@ class singleMovie extends Component {
   }
 
   render() {
-    const { singleMovieData, singlePosterLoaded } = this.props;
-    console.log(singleMovieData);
+    const {
+      singleMovieData,
+      singlePosterLoaded,
+      singleMovieError
+    } = this.props;
+
+    if (singleMovieError) {
+      return <Redirect to="/" />;
+    }
     let posterSrc = null;
     //if API request returned data
     if (singleMovieData && singleMovieData.poster_path) {
@@ -190,7 +197,8 @@ class singleMovie extends Component {
 const mapStateToProps = (state, props) => {
   return {
     singleMovieData: state.singleMovie.singleMovieData,
-    singlePosterLoaded: state.singleMovie.singlePosterLoaded
+    singlePosterLoaded: state.singleMovie.singlePosterLoaded,
+    singleMovieError: state.singleMovie.singleMovieError
   };
 };
 

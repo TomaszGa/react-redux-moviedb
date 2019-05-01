@@ -27,7 +27,8 @@ const initialState = {
     showSearchResultsList: false
   },
   singleMovie: {
-    singlePosterLoaded: false
+    singlePosterLoaded: false,
+    singleMovieError: false
   }
 };
 
