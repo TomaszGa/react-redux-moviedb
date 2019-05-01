@@ -6,7 +6,7 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h3`
-  margin-bottom: 0;
+  margin: 0;
 `;
 
 const Data = styled.span`

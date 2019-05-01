@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
+import SingleTextArea from "../components/SingleTextArea";
 import notFound from "../poster-not-found.png";
-import MovieInformationBox from "../components/MovieInformationBox";
-import NavList from "../components/NavList";
 
 import {
   getSingleMovie,
@@ -48,27 +47,6 @@ const Poster = styled.img`
 
   margin-bottom: 0;
   display: block;
-`;
-
-const TextBox = styled.div`
-  width: 55%;
-  height: 100%;
-  padding: 30px;
-  color: #fff;
-`;
-
-const MovieHeading = styled.h1`
-  margin-top: 0;
-  color: #fff;
-`;
-
-const MovieSubheading = styled.h2`
-  color: #01d277;
-`;
-
-const InfoBoxes = styled.div`
-  display: flex;
-  flex-wrap: wrap;
 `;
 
 class singleMovie extends Component {
@@ -133,7 +111,7 @@ class singleMovie extends Component {
     let castData = null;
 
     if (singleMovieCast) {
-      castData = singleMovieCast.cast.splice(0, 5).map(person => {
+      castData = singleMovieCast.cast.slice(0, 5).map(person => {
         return { id: person.id, name: person.name };
       });
     }
@@ -148,28 +126,10 @@ class singleMovie extends Component {
             <PosterContainer>
               <Poster src={posterSrc} alt="movie poster" />
             </PosterContainer>
-            <TextBox>
-              <MovieHeading>{singleMovieData.original_title}</MovieHeading>
-              <MovieSubheading>{singleMovieData.tagline}</MovieSubheading>
-              <p>{singleMovieData.overview}</p>
-              <NavList
-                data={singleMovieData.genres}
-                baseUrl={"/explore/genre/"}
-              />
-              <InfoBoxes>
-                <MovieInformationBox
-                  heading={"Vote Average:"}
-                  data={`${singleMovieData.vote_average}/10`}
-                />
-                <MovieInformationBox
-                  heading={"Release Date:"}
-                  data={`${singleMovieData.release_date}`}
-                />
-              </InfoBoxes>
-              {castData ? (
-                <NavList data={castData} baseUrl={"/explore/actor/"} />
-              ) : null}
-            </TextBox>
+            <SingleTextArea
+              singleMovieData={singleMovieData}
+              castData={castData}
+            />
           </InnerContainer>
         </Container>
       </>
