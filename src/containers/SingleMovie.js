@@ -5,13 +5,13 @@ import { Link, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import notFound from "../poster-not-found.png";
-import MovieInformationBox from "./MovieInformationBox";
+import MovieInformationBox from "../components/MovieInformationBox";
 
 import {
   getSingleMovie,
   singlePosterLoaded
 } from "../actions/singleMovieActions";
-import FullScreenLoader from "./FullScreenLoader";
+import FullScreenLoader from "../components/FullScreenLoader";
 
 const Container = styled.div`
   padding: 30px 15px;

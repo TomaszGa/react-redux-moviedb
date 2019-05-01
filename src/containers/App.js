@@ -3,7 +3,7 @@ import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 
 import Header from "../components/Header";
 // import FeaturedMovie from "../components/FeaturedMovie";
-import SingleMovie from "../components/SingleMovie";
+import SingleMovie from "./SingleMovie";
 import ExploreMovies from "../containers/ExploreMovies";
 import { Helmet } from "react-helmet";
 

@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { getExploreMovies } from "../actions/exploreActions";
 import FullScreenLoader from "../components/FullScreenLoader";
 import ExploreGenreHeader from "../components/ExploreGenreHeader";
+import ExploreActorHeader from "../components/ExploreActorHeader";
 
 const Container = styled.div`
   background: #222;
@@ -42,6 +43,12 @@ class ExploreMovies extends Component {
           <ExploreGenreHeader genre={this.props.match.params.query} />
         );
         break;
+      case "actor":
+        console.log("am here");
+        exploreResultsHeader = (
+          <ExploreActorHeader actorInfo={this.props.actorInfo} />
+        );
+        break;
       default:
     }
 
@@ -62,7 +69,8 @@ class ExploreMovies extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    exploreMovieData: state.explore.exploreMovieData
+    exploreMovieData: state.explore.exploreMovieData,
+    actorInfo: state.explore.actorInfo
   };
 };
 

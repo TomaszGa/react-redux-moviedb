@@ -21,6 +21,8 @@ export function getSingleMovie(id) {
       .then(responseJson => {
         //disable spinner if response arrived under 200ms
         timeoutCheck = false;
+
+        //if not found (status code 34) set error status
         if (responseJson.status_code && responseJson.status_code === 34) {
           dispatch(setSingleError());
         } else {
@@ -29,6 +31,7 @@ export function getSingleMovie(id) {
       })
       .catch(error => {
         console.log("single movie fetch failed");
+        dispatch(setSingleError());
       });
   };
 }
