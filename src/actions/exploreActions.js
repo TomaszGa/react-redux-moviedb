@@ -8,7 +8,6 @@ export function getExploreMovies(topic, query) {
         searchParameter = "with_cast";
         break;
       case "genre":
-        console.log("reaching dis");
         searchParameter = "with_genres";
         break;
       default:

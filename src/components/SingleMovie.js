@@ -39,7 +39,7 @@ const InnerContainer = styled.div`
 
 const PosterContainer = styled.div`
   width: 45%;
-  min-height: 540px;
+  min-height: 500px;
 `;
 
 const Poster = styled.img`

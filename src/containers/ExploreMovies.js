@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 
 import { getExploreMovies } from "../actions/exploreActions";
 import FullScreenLoader from "../components/FullScreenLoader";
+import ExploreGenreHeader from "../components/ExploreGenreHeader";
 
 const Container = styled.div`
   background: #222;
@@ -30,16 +31,23 @@ class ExploreMovies extends Component {
   }
 
   render() {
-    console.log(this.props);
     if (!this.props.exploreMovieData) {
       return <FullScreenLoader />;
     }
 
+    let exploreResultsHeader = null;
+    switch (this.props.match.params.topic) {
+      case "genre":
+        exploreResultsHeader = (
+          <ExploreGenreHeader genre={this.props.match.params.query} />
+        );
+        break;
+      default:
+    }
+
     return (
       <Container>
-        <div>
-          {this.props.match.params.topic}: {this.props.match.params.query}
-        </div>
+        {exploreResultsHeader}
         {this.props.exploreMovieData.results.map(result => {
           return (
             <Link to={`/s/${result.id}`}>

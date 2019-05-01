@@ -77,4 +77,4 @@ const genreMasterList = [
   }
 ];
 
-export default genreMasterlist;
+export default genreMasterList;
