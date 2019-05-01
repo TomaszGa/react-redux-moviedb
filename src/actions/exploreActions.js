@@ -7,6 +7,10 @@ export function getExploreMovies(topic, query) {
       case "actor":
         searchParameter = "with_cast";
         break;
+      case "genre":
+        console.log("reaching dis");
+        searchParameter = "with_genres";
+        break;
       default:
     }
 
@@ -17,7 +21,7 @@ export function getExploreMovies(topic, query) {
     )
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson);
+        // console.log(responseJson);
         dispatch(setExploreMovies(responseJson));
       })
       .catch(error => {});

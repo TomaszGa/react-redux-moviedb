@@ -152,7 +152,10 @@ class singleMovie extends Component {
               <Genres>
                 {singleMovieData.genres.map(genre => {
                   return (
-                    <GenreLink to="/" key={genre.name}>
+                    <GenreLink
+                      to={`/explore/genre/${genre.id}`}
+                      key={genre.name}
+                    >
                       {genre.name}
                     </GenreLink>
                   );
