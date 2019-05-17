@@ -19,7 +19,7 @@ const Container = styled.div`
   ${({ backdropPath }) =>
     backdropPath &&
     `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  url(https://image.tmdb.org/t/p/original/${backdropPath}););`}
+  url(https://image.tmdb.org/t/p/original/${backdropPath});`}
 
   background-size: cover;
   background-position: top center;
