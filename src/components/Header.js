@@ -22,14 +22,9 @@ const InnerContainer = styled.div`
   height: 80px;
 `;
 
-const LogoLink = styled(Link)`
-  //text-decoration: none;
-`;
-
 const Logo = styled.img`
   margin: 0;
   width: 180px;
-  //text-decoration: none;
 `;
 
 const Header = () => {
