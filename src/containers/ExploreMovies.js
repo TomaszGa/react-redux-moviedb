@@ -8,6 +8,7 @@ import { getExploreMovies } from "../actions/exploreActions";
 import FullScreenLoader from "../components/FullScreenLoader";
 import ExploreGenreHeader from "../components/ExploreGenreHeader";
 import ExploreActorHeader from "../components/ExploreActorHeader";
+import ExploreResultCard from "../components/ExploreResultCard";
 
 const Container = styled.div`
   background: #222;
@@ -19,6 +20,13 @@ const Container = styled.div`
   flex-direction: column;
 
   padding-top: 200px;
+`;
+
+const ExploreResultsList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  max-width: 800px;
+  width: 100%;
 `;
 
 class ExploreMovies extends Component {
@@ -44,7 +52,6 @@ class ExploreMovies extends Component {
         );
         break;
       case "actor":
-        console.log("am here");
         exploreResultsHeader = (
           <ExploreActorHeader actorInfo={this.props.actorInfo} />
         );
@@ -55,13 +62,11 @@ class ExploreMovies extends Component {
     return (
       <Container>
         {exploreResultsHeader}
-        {this.props.exploreMovieData.results.map(result => {
-          return (
-            <Link to={`/s/${result.id}`}>
-              <h2>{result.title}</h2>
-            </Link>
-          );
-        })}
+        <ExploreResultsList>
+          {this.props.exploreMovieData.results.map(result => {
+            return <ExploreResultCard data={result} />;
+          })}
+        </ExploreResultsList>
       </Container>
     );
   }
