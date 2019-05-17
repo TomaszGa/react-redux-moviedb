@@ -25,12 +25,13 @@ const Container = styled.div`
   background-position: top center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
   justify-content: center;
 `;
 
 const InnerContainer = styled.div`
+  margin: 150px auto 0 auto;
   display: flex;
   max-width: 850px;
   width: 100%;
