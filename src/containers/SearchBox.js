@@ -35,7 +35,6 @@ width: 100%;
 const StyledLink = styled(Link)`
   display: block;
   color: #fff;
-  text-decoration: none;
   padding: 6px;
 `;
 

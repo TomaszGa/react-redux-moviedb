@@ -13,7 +13,6 @@ const StyledLink = styled(Link)`
   background: #01d277;
   margin: 0 10px 7px 0;
   color: #fff;
-  text-decoration: none;
   font-size: 15px;
 `;
 

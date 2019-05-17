@@ -23,13 +23,13 @@ const InnerContainer = styled.div`
 `;
 
 const LogoLink = styled(Link)`
-  text-decoration: none;
+  //text-decoration: none;
 `;
 
 const Logo = styled.img`
   margin: 0;
   width: 180px;
-  text-decoration: none;
+  //text-decoration: none;
 `;
 
 const Header = () => {
