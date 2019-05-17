@@ -10,12 +10,12 @@ export function getSingleMovie(id) {
      * on a fast connection a quick change of text and images is better
      */
 
-    setTimeout(() => {
-      if (timeoutCheck) {
-        dispatch(clearSingleMovie());
-      }
-    }, 300);
-
+    // setTimeout(() => {
+    //   if (timeoutCheck) {
+    //     dispatch(clearSingleMovie());
+    //   }
+    // }, 300);
+    dispatch(clearSingleMovie());
     dispatch(clearSingleError());
 
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${keys.apiKey}`)
