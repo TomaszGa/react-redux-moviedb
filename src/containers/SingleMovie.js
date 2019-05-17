@@ -25,8 +25,6 @@ const Container = styled.div`
   background-position: top center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  // display: flex;
-  // align-items: center;
   justify-content: center;
 `;
 

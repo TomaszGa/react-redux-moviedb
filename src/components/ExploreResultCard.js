@@ -11,6 +11,7 @@ const Container = styled.li`
 
 const InnerContainer = styled.div`
   display: flex;
+  color: #fff;
 `;
 
 const PosterContainer = styled.div`
@@ -26,7 +27,9 @@ const DetailsContainer = styled.div`
   padding: 15px;
 `;
 
-const DetailsTitle = styled.h2``;
+const DetailsTitle = styled.h2`
+  margin: 0;
+`;
 
 const ExploreResultCard = props => {
   console.log(props.data);
@@ -42,6 +45,7 @@ const ExploreResultCard = props => {
           </PosterContainer>
           <DetailsContainer>
             <DetailsTitle>{data.original_title}</DetailsTitle>
+            <p>{data.overview}</p>
           </DetailsContainer>
         </InnerContainer>
       </Link>

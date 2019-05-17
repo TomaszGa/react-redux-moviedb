@@ -31,9 +31,9 @@ const Header = () => {
   return (
     <Container>
       <InnerContainer>
-        <LogoLink to="/">
+        <Link to="/">
           <Logo src={logo} alt="Powered by moviedb " />
-        </LogoLink>
+        </Link>
         <SearchBox />
       </InnerContainer>
     </Container>
