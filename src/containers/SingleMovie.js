@@ -119,9 +119,7 @@ class singleMovie extends Component {
 
     return (
       <>
-        <Helmet>
-          <title>{`TMDB Browser - ${singleMovieData.original_title}`}</title>
-        </Helmet>
+        <Helmet title={`TMDB Browser - ${singleMovieData.original_title}`} />
         <Container backdropPath={singleMovieData.backdrop_path}>
           <InnerContainer>
             <PosterContainer>
