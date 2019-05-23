@@ -6,6 +6,8 @@ import MovieInformationBox from "./MovieInformationBox";
 const InfoBoxes = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const SingleInfoBoxes = props => {

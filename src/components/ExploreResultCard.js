@@ -24,7 +24,7 @@ const Poster = styled.img`
 
 const DetailsContainer = styled.div`
   width: 85%;
-  padding: 15px;
+  padding: 0 15px;
 `;
 
 const DetailsTitle = styled.h2`

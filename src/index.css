@@ -4,7 +4,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Roboto", "Work Sans", sans-serif;
   box-sizing: border-box;
 }
 
@@ -18,7 +18,16 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Quattrocento Sans", "Work Sans", sans-serif;
+  font-family: "Roboto", "Quattrocento Sans", "Work Sans", sans-serif;
+  margin-top: 0;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+p {
+  margin-top: 0;
 }
 
 a {

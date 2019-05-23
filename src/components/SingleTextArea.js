@@ -12,12 +12,17 @@ const TextBox = styled.div`
 `;
 
 const MovieHeading = styled.h1`
-  margin-top: 0;
   color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 `;
 
 const MovieSubheading = styled.h2`
   color: #01d277;
+`;
+
+const MovieDescription = styled.p`
+  margin-bottom: 30px;
 `;
 
 const SingleTextArea = props => {
@@ -25,7 +30,7 @@ const SingleTextArea = props => {
     <TextBox>
       <MovieHeading>{props.singleMovieData.original_title}</MovieHeading>
       <MovieSubheading>{props.singleMovieData.tagline}</MovieSubheading>
-      <p>{props.singleMovieData.overview}</p>
+      <MovieDescription>{props.singleMovieData.overview}</MovieDescription>
       <NavList
         data={props.singleMovieData.genres}
         baseUrl={"/explore/genre/"}
