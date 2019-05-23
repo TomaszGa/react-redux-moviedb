@@ -28,7 +28,11 @@ const DetailsContainer = styled.div`
 `;
 
 const DetailsTitle = styled.h2`
-  margin: 0;
+  margin: 0 0 10px 0;
+`;
+
+const DetailsDescription = styled.p`
+  font-weight: 300;
 `;
 
 const ExploreResultCard = props => {
@@ -45,7 +49,7 @@ const ExploreResultCard = props => {
           </PosterContainer>
           <DetailsContainer>
             <DetailsTitle>{data.original_title}</DetailsTitle>
-            <p>{data.overview}</p>
+            <DetailsDescription>{data.overview}</DetailsDescription>
           </DetailsContainer>
         </InnerContainer>
       </Link>

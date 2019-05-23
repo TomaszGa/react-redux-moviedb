@@ -8,7 +8,7 @@ import SearchBox from "../containers/SearchBox";
 
 const Container = styled.div`
   background: transparent;
-  position: fixed;
+  position: absolute;
   width: 100%;
   padding: 20px 0px;
 `;
