@@ -13,17 +13,20 @@ import {
 } from "../actions/singleMovieActions";
 import FullScreenLoader from "../components/FullScreenLoader";
 
-const Container = styled.div`
-  padding: 30px 15px;
-  background: #222;
+const Background = styled.div`
+  background: #000;
   ${({ backdropPath }) =>
     backdropPath &&
-    `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  url(https://image.tmdb.org/t/p/original/${backdropPath});`}
+    `background: #000 url(https://image.tmdb.org/t/p/original${backdropPath});`}
 
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
+`;
+
+const Container = styled.div`
+  padding: 30px 15px;
+  background: rgba(0, 0, 0, 0.7);
   min-height: 100vh;
   justify-content: center;
 `;
@@ -81,7 +84,7 @@ class singleMovie extends Component {
     let posterSrc = null;
     //if API request returned data
     if (singleMovieData && singleMovieData.poster_path) {
-      posterSrc = `https://image.tmdb.org/t/p/w500/${
+      posterSrc = `https://image.tmdb.org/t/p/w500${
         singleMovieData.poster_path
       }`;
 
@@ -90,10 +93,10 @@ class singleMovie extends Component {
       poster.src = posterSrc;
 
       //preload backdrop image
-      const backdrop = new Image();
-      backdrop.src = `https://image.tmdb.org/t/p/original/${
-        singleMovieData.backdrop_path
-      }`;
+      // const backdrop = new Image();
+      // backdrop.src = `https://image.tmdb.org/t/p/original/${
+      //   singleMovieData.backdrop_path
+      // }`;
 
       //if poster image loaded, dispatch action, this will display the single movie
       poster.onload = this.props.onSinglePosterLoaded;
@@ -118,17 +121,19 @@ class singleMovie extends Component {
     return (
       <>
         <Helmet title={`TMDB Browser - ${singleMovieData.original_title}`} />
-        <Container backdropPath={singleMovieData.backdrop_path}>
-          <InnerContainer>
-            <PosterContainer>
-              <Poster src={posterSrc} alt="movie poster" />
-            </PosterContainer>
-            <SingleTextArea
-              singleMovieData={singleMovieData}
-              castData={castData}
-            />
-          </InnerContainer>
-        </Container>
+        <Background backdropPath={singleMovieData.backdrop_path}>
+          <Container>
+            <InnerContainer>
+              <PosterContainer>
+                <Poster src={posterSrc} alt="movie poster" />
+              </PosterContainer>
+              <SingleTextArea
+                singleMovieData={singleMovieData}
+                castData={castData}
+              />
+            </InnerContainer>
+          </Container>
+        </Background>
       </>
     );
   }
