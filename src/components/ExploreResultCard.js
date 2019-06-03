@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import StarRating from "./StarRating";
 const Container = styled.li`
   background: #444;
   width: 100%;
@@ -27,8 +27,15 @@ const DetailsContainer = styled.div`
   padding: 0 15px;
 `;
 
+const DetailsTop = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
 const DetailsTitle = styled.h2`
-  margin: 0 0 10px 0;
+  margin: 0 10px 0 0;
+  text-transform: uppercase;
 `;
 
 const DetailsDescription = styled.p`
@@ -36,8 +43,8 @@ const DetailsDescription = styled.p`
 `;
 
 const ExploreResultCard = props => {
-  console.log(props.data);
   const { data } = props;
+  console.log(data.original_title);
   return (
     <Container>
       <Link to={`/s/${data.id}`}>
@@ -48,7 +55,10 @@ const ExploreResultCard = props => {
             />
           </PosterContainer>
           <DetailsContainer>
-            <DetailsTitle>{data.original_title}</DetailsTitle>
+            <DetailsTop>
+              <DetailsTitle>{data.original_title}</DetailsTitle>
+              <StarRating rating={data.vote_average / 2} />
+            </DetailsTop>
             <DetailsDescription>{data.overview}</DetailsDescription>
           </DetailsContainer>
         </InnerContainer>
