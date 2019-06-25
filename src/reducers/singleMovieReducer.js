@@ -7,6 +7,7 @@ const singleMovieReducer = (state = {}, { type, payload }) => {
       };
     }
     case "CLEAR_SINGLE_MOVIE": {
+      console.log("clear single movie round 2");
       return {
         ...state,
         singleMovieData: null,

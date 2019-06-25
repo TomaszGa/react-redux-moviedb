@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+  text-align: right;
+  width: 40%;
+  margin-top: 5px;
+`;
+
 const StarRating = props => {
   const starsOutput = [];
   const rating = props.rating - 1;
@@ -53,7 +59,7 @@ const StarRating = props => {
     }
   }
 
-  return <div>{starsOutput}</div>;
+  return <Container>{starsOutput}</Container>;
 };
 
 export default StarRating;

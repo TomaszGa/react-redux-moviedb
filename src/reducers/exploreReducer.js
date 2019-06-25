@@ -6,12 +6,28 @@ const exploreReducer = (state = {}, { type, payload }) => {
         exploreMovieData: payload.exploreMovieData
       };
     }
+
+    case "CLEAR_EXPLORE_MOVIES": {
+      return {
+        ...state,
+        exploreMovieData: null
+      };
+    }
+
     case "SET_ACTOR_INFO": {
       return {
         ...state,
         actorInfo: payload.actorInfoData
       };
     }
+
+    case "CLEAR_ACTOR_INFO": {
+      return {
+        ...state,
+        actorInfo: null
+      };
+    }
+
     default:
       return state;
   }

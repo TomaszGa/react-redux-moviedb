@@ -1,7 +1,11 @@
 import keys from "../keys";
+import { clearSingleMovie } from "./singleMovieActions";
 
 export function getExploreMovies(topic, query) {
   return dispatch => {
+    dispatch(clearSingleMovie());
+    dispatch(clearActorInfo());
+    dispatch(clearExploreMovies());
     let searchParameter = null;
     switch (topic) {
       case "actor":
@@ -21,7 +25,6 @@ export function getExploreMovies(topic, query) {
     )
       .then(response => response.json())
       .then(responseJson => {
-        // console.log(responseJson);
         dispatch(setExploreMovies(responseJson));
       })
       .catch(error => {});
@@ -34,6 +37,12 @@ export function setExploreMovies(exploreMovieData) {
     payload: {
       exploreMovieData: exploreMovieData
     }
+  };
+}
+
+export function clearExploreMovies() {
+  return {
+    type: "CLEAR_EXPLORE_MOVIES"
   };
 }
 
@@ -58,5 +67,11 @@ export function setActorInfo(actorInfoData) {
     payload: {
       actorInfoData: actorInfoData
     }
+  };
+}
+
+export function clearActorInfo() {
+  return {
+    type: "CLEAR_ACTOR_INFO"
   };
 }

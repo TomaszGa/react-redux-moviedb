@@ -9,7 +9,6 @@ const ActorHeading = styled.h1`
 `;
 
 const ExploreActorHeader = props => {
-  console.log(props);
   if (props.actorInfo) {
     return <div>{<ActorHeading>{props.actorInfo.name}</ActorHeading>}</div>;
   }

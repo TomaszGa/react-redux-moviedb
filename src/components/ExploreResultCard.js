@@ -29,13 +29,13 @@ const DetailsContainer = styled.div`
 
 const DetailsTop = styled.div`
   display: flex;
-  align-items: center;
   margin-bottom: 10px;
 `;
 
 const DetailsTitle = styled.h2`
   margin: 0 10px 0 0;
   text-transform: uppercase;
+  width: 60%;
 `;
 
 const DetailsDescription = styled.p`
@@ -44,7 +44,6 @@ const DetailsDescription = styled.p`
 
 const ExploreResultCard = props => {
   const { data } = props;
-  console.log(data.original_title);
   return (
     <Container>
       <Link to={`/s/${data.id}`}>

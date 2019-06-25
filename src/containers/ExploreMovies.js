@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
-import { getExploreMovies } from "../actions/exploreActions";
+import {
+  getExploreMovies,
+  clearExploreMovies
+} from "../actions/exploreActions";
 import FullScreenLoader from "../components/FullScreenLoader";
 import ExploreGenreHeader from "../components/ExploreGenreHeader";
 import ExploreActorHeader from "../components/ExploreActorHeader";
@@ -80,7 +81,8 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = {
-  getExploreMovies: getExploreMovies
+  getExploreMovies: getExploreMovies,
+  clearExploreMovies: clearExploreMovies
 };
 
 export default connect(
