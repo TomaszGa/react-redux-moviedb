@@ -17,7 +17,6 @@ const StyledLink = styled(Link)`
 `;
 
 const NavList = props => {
-  console.log(props);
   return (
     <Container>
       {props.data.map(item => {

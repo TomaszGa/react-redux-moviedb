@@ -18,13 +18,20 @@ export function getExploreMovies(topic, query) {
       default:
     }
 
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?${searchParameter}=${query}&api_key=${
-        keys.apiKey
-      }`
-    )
+    const fetchURL = `https://api.themoviedb.org/3/discover/movie?${searchParameter}=${query}&api_key=${
+      keys.apiKey
+    }&page=1`;
+
+    fetch(fetchURL)
       .then(response => response.json())
       .then(responseJson => {
+        dispatch(
+          setPaginationData(
+            fetchURL,
+            responseJson.page,
+            responseJson.total_pages
+          )
+        );
         dispatch(setExploreMovies(responseJson));
       })
       .catch(error => {});
@@ -32,6 +39,7 @@ export function getExploreMovies(topic, query) {
 }
 
 export function setExploreMovies(exploreMovieData) {
+  console.log(exploreMovieData);
   return {
     type: "SET_EXPLORE_MOVIES",
     payload: {
@@ -43,6 +51,17 @@ export function setExploreMovies(exploreMovieData) {
 export function clearExploreMovies() {
   return {
     type: "CLEAR_EXPLORE_MOVIES"
+  };
+}
+
+export function setPaginationData(paginationURL, currentPage, totalPages) {
+  return {
+    type: "SET_PAGINATION_DATA",
+    payload: {
+      paginationURL: paginationURL,
+      currentPage: currentPage,
+      totalPages: totalPages
+    }
   };
 }
 

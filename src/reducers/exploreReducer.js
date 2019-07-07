@@ -28,6 +28,15 @@ const exploreReducer = (state = {}, { type, payload }) => {
       };
     }
 
+    case "SET_PAGINATION_DATA": {
+      return {
+        ...state,
+        paginationURL: payload.paginationURL,
+        currentPage: payload.currentPage,
+        totalPages: payload.totalPages
+      };
+    }
+
     default:
       return state;
   }

@@ -64,7 +64,6 @@ export function singlePosterLoaded() {
 }
 
 export function clearSingleMovie() {
-  console.log("clearing single movie!!");
   return {
     type: "CLEAR_SINGLE_MOVIE"
   };
