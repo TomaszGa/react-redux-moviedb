@@ -2,6 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 
+const ActorHeadingContainer = styled.div`
+  min-height: 75px;
+`;
+
 const ActorHeading = styled.h1`
   color: #fff;
   font-size: 40px;
@@ -9,10 +13,14 @@ const ActorHeading = styled.h1`
 `;
 
 const ExploreActorHeader = props => {
+  console.log(props.actorInfo);
+
+  let output = <ActorHeading>Loading...</ActorHeading>;
+
   if (props.actorInfo) {
-    return <div>{<ActorHeading>{props.actorInfo.name}</ActorHeading>}</div>;
+    output = <ActorHeading>{props.actorInfo.name}</ActorHeading>;
   }
-  return null;
+  return output;
 };
 
 export default ExploreActorHeader;

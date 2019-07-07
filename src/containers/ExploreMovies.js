@@ -23,6 +23,12 @@ const Container = styled.div`
   padding-top: 200px;
 `;
 
+const ExploreResultsPlaceholder = styled.h1`
+  color: #fff;
+  font-size: 40px;
+  text-align: left;
+`;
+
 const ExploreResultsList = styled.ul`
   list-style-type: none;
   padding: 0;
@@ -45,7 +51,10 @@ class ExploreMovies extends Component {
       return <FullScreenLoader />;
     }
 
-    let exploreResultsHeader = null;
+    let exploreResultsHeader = (
+      <ExploreResultsPlaceholder>Loading...</ExploreResultsPlaceholder>
+    );
+    // console.log(exploreResultsHeader);
     switch (this.props.match.params.topic) {
       case "genre":
         exploreResultsHeader = (
@@ -59,7 +68,7 @@ class ExploreMovies extends Component {
         break;
       default:
     }
-
+    // console.log(exploreResultsHeader);
     return (
       <Container>
         {exploreResultsHeader}
