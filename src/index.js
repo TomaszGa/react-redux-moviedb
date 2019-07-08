@@ -3,9 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./containers/App";
 
-// import Typography from "typography";
-// import fairyGatesTheme from "typography-theme-fairy-gates";
-
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { combineReducers, createStore, applyMiddleware } from "redux";
