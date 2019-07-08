@@ -9,8 +9,6 @@ const ActorHeading = styled.h1`
 `;
 
 const ExploreActorHeader = props => {
-  console.log(props.actorInfo);
-
   let output = <ActorHeading>Loading...</ActorHeading>;
 
   if (props.actorInfo) {

@@ -4,12 +4,14 @@ import styled from "styled-components";
 
 import {
   getExploreMovies,
-  clearExploreMovies
+  getInfiniteScrollMovies
 } from "../actions/exploreActions";
 import FullScreenLoader from "../components/FullScreenLoader";
 import ExploreGenreHeader from "../components/ExploreGenreHeader";
 import ExploreActorHeader from "../components/ExploreActorHeader";
 import ExploreResultCard from "../components/ExploreResultCard";
+
+import debounce from "lodash.debounce";
 
 const Container = styled.div`
   background: #222;
@@ -44,7 +46,21 @@ class ExploreMovies extends Component {
       this.props.match.params.topic,
       this.props.match.params.query
     );
+    window.addEventListener("scroll", this.onScroll, false);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+
+  onScroll = debounce(() => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 500
+    ) {
+      this.props.getInfiniteScrollMovies();
+    }
+  }, 100);
 
   render() {
     if (!this.props.exploreMovieData) {
@@ -68,13 +84,12 @@ class ExploreMovies extends Component {
         break;
       default:
     }
-    // console.log(exploreResultsHeader);
     return (
       <Container>
         {exploreResultsHeader}
         <ExploreResultsList>
           {this.props.exploreMovieData.results.map(result => {
-            return <ExploreResultCard data={result} />;
+            return <ExploreResultCard data={result} key={result.id} />;
           })}
         </ExploreResultsList>
       </Container>
@@ -91,7 +106,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = {
   getExploreMovies: getExploreMovies,
-  clearExploreMovies: clearExploreMovies
+  getInfiniteScrollMovies: getInfiniteScrollMovies
 };
 
 export default connect(

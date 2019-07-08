@@ -38,8 +38,31 @@ export function getExploreMovies(topic, query) {
   };
 }
 
+export function getInfiniteScrollMovies(topic, query) {
+  return (dispatch, getState) => {
+    const { explore } = getState();
+
+    const fetchURL =
+      explore.paginationURL + "&page=" + (explore.currentPage + 1);
+    console.log(fetchURL);
+
+    fetch(fetchURL)
+      .then(response => response.json())
+      .then(responseJson => {
+        dispatch(
+          setPaginationData(
+            fetchURL,
+            responseJson.page,
+            responseJson.total_pages
+          )
+        );
+        dispatch(setExploreMovies(responseJson));
+      })
+      .catch(error => {});
+  };
+}
+
 export function setExploreMovies(exploreMovieData) {
-  console.log(exploreMovieData);
   return {
     type: "SET_EXPLORE_MOVIES",
     payload: {
