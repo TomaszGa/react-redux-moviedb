@@ -7,6 +7,21 @@ const exploreReducer = (state = {}, { type, payload }) => {
       };
     }
 
+    case "APPEND_EXPLORE_MOVIES": {
+      console.log(payload.updatedMovieData.results);
+      console.log("appending explore movies 2");
+      return {
+        ...state,
+        exploreMovieData: {
+          ...state.exploreMovieData,
+          results: [
+            ...state.exploreMovieData.results,
+            ...payload.updatedMovieData.results
+          ]
+        }
+      };
+    }
+
     case "CLEAR_EXPLORE_MOVIES": {
       return {
         ...state,

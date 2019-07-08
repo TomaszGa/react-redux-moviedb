@@ -20,31 +20,7 @@ export function getExploreMovies(topic, query) {
 
     const fetchURL = `https://api.themoviedb.org/3/discover/movie?${searchParameter}=${query}&api_key=${
       keys.apiKey
-    }&page=1`;
-
-    fetch(fetchURL)
-      .then(response => response.json())
-      .then(responseJson => {
-        dispatch(
-          setPaginationData(
-            fetchURL,
-            responseJson.page,
-            responseJson.total_pages
-          )
-        );
-        dispatch(setExploreMovies(responseJson));
-      })
-      .catch(error => {});
-  };
-}
-
-export function getInfiniteScrollMovies(topic, query) {
-  return (dispatch, getState) => {
-    const { explore } = getState();
-
-    const fetchURL =
-      explore.paginationURL + "&page=" + (explore.currentPage + 1);
-    console.log(fetchURL);
+    }`;
 
     fetch(fetchURL)
       .then(response => response.json())
@@ -67,6 +43,40 @@ export function setExploreMovies(exploreMovieData) {
     type: "SET_EXPLORE_MOVIES",
     payload: {
       exploreMovieData: exploreMovieData
+    }
+  };
+}
+
+export function getInfiniteScrollMovies(topic, query) {
+  return (dispatch, getState) => {
+    const { explore } = getState();
+
+    const fetchURL =
+      explore.paginationURL + "&page=" + (explore.currentPage + 1);
+    console.log(fetchURL);
+
+    fetch(fetchURL)
+      .then(response => response.json())
+      .then(responseJson => {
+        dispatch(
+          setPaginationData(
+            explore.paginationURL,
+            responseJson.page,
+            responseJson.total_pages
+          )
+        );
+        dispatch(appendExploreMovies(responseJson));
+      })
+      .catch(error => {});
+  };
+}
+
+export function appendExploreMovies(updatedMovieData) {
+  console.log("appending explore movies");
+  return {
+    type: "APPEND_EXPLORE_MOVIES",
+    payload: {
+      updatedMovieData: updatedMovieData
     }
   };
 }
