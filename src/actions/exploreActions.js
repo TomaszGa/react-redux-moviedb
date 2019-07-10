@@ -50,14 +50,17 @@ export function setExploreMovies(exploreMovieData) {
 export function getInfiniteScrollMovies(topic, query) {
   return (dispatch, getState) => {
     const { explore } = getState();
+    if (explore.currentPage >= explore.totalPages) {
+      return;
+    }
 
     const fetchURL =
       explore.paginationURL + "&page=" + (explore.currentPage + 1);
-    console.log(fetchURL);
-
+    dispatch(startInfiniteScrollLoading());
     fetch(fetchURL)
       .then(response => response.json())
       .then(responseJson => {
+        dispatch(endInfiniteScrollLoading());
         dispatch(
           setPaginationData(
             explore.paginationURL,
@@ -72,12 +75,25 @@ export function getInfiniteScrollMovies(topic, query) {
 }
 
 export function appendExploreMovies(updatedMovieData) {
-  console.log("appending explore movies");
   return {
     type: "APPEND_EXPLORE_MOVIES",
     payload: {
       updatedMovieData: updatedMovieData
     }
+  };
+}
+
+export function startInfiniteScrollLoading() {
+  console.log("infinite scroll loading start");
+  return {
+    type: "INFINITE_SCROLL_LOADING_START"
+  };
+}
+
+export function endInfiniteScrollLoading() {
+  console.log("infinite scroll loading end");
+  return {
+    type: "INFINITE_SCROLL_LOADING_END"
   };
 }
 

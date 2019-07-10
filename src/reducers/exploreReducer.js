@@ -8,8 +8,6 @@ const exploreReducer = (state = {}, { type, payload }) => {
     }
 
     case "APPEND_EXPLORE_MOVIES": {
-      console.log(payload.updatedMovieData.results);
-      console.log("appending explore movies 2");
       return {
         ...state,
         exploreMovieData: {
@@ -49,6 +47,19 @@ const exploreReducer = (state = {}, { type, payload }) => {
         paginationURL: payload.paginationURL,
         currentPage: payload.currentPage,
         totalPages: payload.totalPages
+      };
+    }
+
+    case "INFINITE_SCROLL_LOADING_START": {
+      return {
+        ...state,
+        infiniteScrollLoading: true
+      };
+    }
+    case "INFINITE_SCROLL_LOADING_END": {
+      return {
+        ...state,
+        infiniteScrollLoading: false
       };
     }
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { BeatLoader } from "react-spinners";
 
 import {
   getExploreMovies,
@@ -23,6 +24,7 @@ const Container = styled.div`
   flex-direction: column;
 
   padding-top: 200px;
+  padding-bottom: 50px;
 `;
 
 const ExploreResultsPlaceholder = styled.h1`
@@ -39,8 +41,6 @@ const ExploreResultsList = styled.ul`
 `;
 
 class ExploreMovies extends Component {
-  state = {};
-
   componentDidMount() {
     this.props.getExploreMovies(
       this.props.match.params.topic,
@@ -92,6 +92,9 @@ class ExploreMovies extends Component {
             return <ExploreResultCard data={result} key={result.id} />;
           })}
         </ExploreResultsList>
+        {this.props.infiniteScrollLoading ? (
+          <BeatLoader color={"#01d277"} loading={true} />
+        ) : null}
       </Container>
     );
   }
@@ -100,7 +103,8 @@ class ExploreMovies extends Component {
 const mapStateToProps = (state, props) => {
   return {
     exploreMovieData: state.explore.exploreMovieData,
-    actorInfo: state.explore.actorInfo
+    actorInfo: state.explore.actorInfo,
+    infiniteScrollLoading: state.explore.infiniteScrollLoading
   };
 };
 
