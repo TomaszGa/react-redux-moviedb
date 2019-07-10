@@ -31,7 +31,7 @@ const initialState = {
 
 const store = createStore(
   combinedReducers,
-  initialState,
+  //initialState,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
