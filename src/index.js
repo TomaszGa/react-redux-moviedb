@@ -19,16 +19,6 @@ const combinedReducers = combineReducers({
   explore: exploreReducer
 });
 
-const initialState = {
-  search: {
-    showSearchResultsList: false
-  },
-  singleMovie: {
-    singlePosterLoaded: false,
-    singleMovieError: false
-  }
-};
-
 const store = createStore(
   combinedReducers,
   //initialState,
