@@ -72,7 +72,9 @@ class SearchBox extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.props.getSearchResults(this.state.inputValue);
+    if (this.state.inputValue.length > 0) {
+      this.props.getSearchResults(this.state.inputValue);
+    }
   };
 
   render() {
