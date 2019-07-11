@@ -4,14 +4,16 @@ import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-import SingleTextArea from "../components/SingleTextArea";
+import SingleContentArea from "../components/SingleContentArea";
 import notFound from "../poster-not-found.png";
 
 import {
   getSingleMovie,
   singlePosterLoaded
 } from "../actions/singleMovieActions";
+
 import FullScreenLoader from "../components/FullScreenLoader";
+import WatchlistButton from "./WatchlistButton";
 
 const Background = styled.div`
   background: #000;
@@ -51,7 +53,7 @@ const Poster = styled.img`
   display: block;
 `;
 
-class singleMovie extends Component {
+class SingleMovie extends Component {
   componentDidMount() {
     this.findMovieId();
   }
@@ -127,10 +129,11 @@ class singleMovie extends Component {
               <PosterContainer>
                 <Poster src={posterSrc} alt="movie poster" />
               </PosterContainer>
-              <SingleTextArea
+              <SingleContentArea
                 singleMovieData={singleMovieData}
                 castData={castData}
               />
+              <WatchlistButton movieId={singleMovieData.id} />
             </InnerContainer>
           </Container>
         </Background>
@@ -156,4 +159,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(singleMovie);
+)(SingleMovie);

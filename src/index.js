@@ -12,11 +12,13 @@ import { BrowserRouter } from "react-router-dom";
 import singleMovieReducer from "./reducers/singleMovieReducer";
 import searchReducer from "./reducers/searchReducer";
 import exploreReducer from "./reducers/exploreReducer";
+import watchlistReducer from "./reducers/watchlistReducer";
 
 const combinedReducers = combineReducers({
   singleMovie: singleMovieReducer,
   search: searchReducer,
-  explore: exploreReducer
+  explore: exploreReducer,
+  watchlist: watchlistReducer
 });
 
 const store = createStore(
