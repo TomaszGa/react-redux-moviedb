@@ -34,3 +34,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+::selection {
+  background: #01d277;
+}

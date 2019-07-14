@@ -3,18 +3,23 @@ import styled from "styled-components";
 
 import NavList from "./NavList";
 import SingleInfoBoxes from "./SingleInfoBoxes";
+import WatchlistButton from "../containers/WatchlistButton";
 
 const TextBox = styled.div`
-  width: 55%;
-  height: 100%;
   padding: 30px;
   color: #fff;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  margin-bottom: 4px;
 `;
 
 const MovieHeading = styled.h1`
   color: #fff;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  width: 80%;
+  margin-bottom: 0;
 `;
 
 const MovieSubheading = styled.h2`
@@ -28,7 +33,14 @@ const MovieDescription = styled.p`
 const SingleTextArea = props => {
   return (
     <TextBox>
-      <MovieHeading>{props.singleMovieData.original_title}</MovieHeading>
+      <TitleContainer>
+        <MovieHeading>{props.singleMovieData.original_title}</MovieHeading>
+        <WatchlistButton
+          movieId={props.singleMovieData.id}
+          iconSize={32}
+          containerHeight={38}
+        />
+      </TitleContainer>
       <MovieSubheading>{props.singleMovieData.tagline}</MovieSubheading>
       <MovieDescription>{props.singleMovieData.overview}</MovieDescription>
       <NavList

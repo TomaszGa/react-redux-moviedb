@@ -13,7 +13,6 @@ import {
 } from "../actions/singleMovieActions";
 
 import FullScreenLoader from "../components/FullScreenLoader";
-import WatchlistButton from "./WatchlistButton";
 
 const Background = styled.div`
   background: #000;
@@ -36,7 +35,7 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   margin: 150px auto 0 auto;
   display: flex;
-  max-width: 850px;
+  max-width: 900px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
 `;
@@ -44,6 +43,11 @@ const InnerContainer = styled.div`
 const PosterContainer = styled.div`
   width: 45%;
   min-height: 500px;
+`;
+
+const ContentContainer = styled.div`
+  width: 55%;
+  height: 100%;
 `;
 
 const Poster = styled.img`
@@ -129,11 +133,12 @@ class SingleMovie extends Component {
               <PosterContainer>
                 <Poster src={posterSrc} alt="movie poster" />
               </PosterContainer>
-              <SingleContentArea
-                singleMovieData={singleMovieData}
-                castData={castData}
-              />
-              <WatchlistButton movieId={singleMovieData.id} />
+              <ContentContainer>
+                <SingleContentArea
+                  singleMovieData={singleMovieData}
+                  castData={castData}
+                />
+              </ContentContainer>
             </InnerContainer>
           </Container>
         </Background>
