@@ -16,7 +16,7 @@ const InnerContainer = styled.div`
 
 const PosterContainer = styled.div`
   width: 15%;
-  min-height: 174px;
+  min-height: 180px;
 `;
 
 const Poster = styled.img`
